@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Windows10用Jekyll搭建个人博客</title>
+<meta name="description" content="整体流程">
+
+<link rel="stylesheet" href="/home/css/main.css">
+<link rel="canonical" href="https://paula15.github.io/home/home/blog/2018/welcome-to-jekyll/">
+<link rel="alternate" type="application/rss+xml" title="Zhengping Zhou" href="https://paula15.github.io/home/home/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52446115-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</head>
+<body>
+  <header class="site-header">
+  <div class="container">
+    <input type="checkbox" id="toggleNavbar">
+    <h1 class="logo"><a href="/home/">Zhengping Zhou</a></h1>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        <li><a href="/home/" title="Home">Home</a></li>
+        
+          <li><a href="/home/blog" title="Blog">Blog</a></li>
+        
+        <!-- <li><a href="http://github.com/Paula15/home/archive/master.zip" title="Download">Download</a></li> -->
+        <li><a href="/home/icons" target="_blank"><i class="icon icon-images"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="page card">
+
+  <header class="post-header">
+    <h1 class="post-title">Windows10用Jekyll搭建个人博客</h1>
+    <em class="post-meta">
+      <time>Jun 24, 2018</time>
+    </em>
+  </header>
+
+  <div class="post-content">
+    <h1>整体流程</h1>
+
+<h2>1 选取主题</h2>
+
+<p>从<a href="http://jekyllthemes.org/">Jekyll主题库</a>选取一款并下载源码。我看中了三款主题：</p>
+
+<ol>
+<li><a href="https://nandomoreirame.github.io/nandomoreira-jekyll-theme/">蓝色</a>：带封图</li>
+<li><a href="http://joshgerdes.com/jekyll-uno/2016/welcome-to-jekyll/">黑色</a>：有侧栏，但移动端排版有bug</li>
+<li><a href="http://nandomoreirame.github.io/end2end/">白色</a>：简洁</li>
+</ol>
+
+<p>最终选中白色。</p>
+
+<h2>2 安装ruby环境</h2>
+
+<p>被Ubuntu虚拟机卡得忍无可忍，痛下决心直接在Windows10上配置ruby。</p>
+
+<blockquote>
+<p>需注意：以下所有操作必须在<strong>管理员CMD</strong>下进行！</p>
+</blockquote>
+
+<h3>2.1 下载<a href="https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi">ruby2.3.3</a></h3>
+
+<p>需勾选<em>Add ruby executables to your path</em></p>
+
+<h3>2.2 下载<a href="https://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe">ruby DevKit</a></h3>
+
+<p>打开解压目录，执行</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="no">DivKit</span><span class="o">&gt;</span> <span class="n">ruby</span> <span class="n">dk</span><span class="o">.</span><span class="n">rb</span> <span class="n">init</span>
+<span class="no">DivKit</span><span class="o">&gt;</span> <span class="n">ruby</span> <span class="n">dk</span><span class="o">.</span><span class="n">rb</span> <span class="n">review</span>
+<span class="no">DivKit</span><span class="o">&gt;</span> <span class="n">ruby</span> <span class="n">dk</span><span class="o">.</span><span class="n">rb</span> <span class="n">install</span>
+</code></pre></div>
+<h3>2.3 更新Gem源</h3>
+
+<p>rubygem这个国外源很慢，需换成国内镜像。</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">gem</span> <span class="n">sources</span> <span class="o">--</span><span class="n">remove</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+<span class="n">gem</span> <span class="n">sources</span> <span class="o">-</span><span class="n">a</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">gems</span><span class="o">.</span><span class="n">ruby</span><span class="o">-</span><span class="n">china</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+</code></pre></div>
+<p>第二步可能出现SSL报错，解决方法是先下载<a href="http://curl.haxx.se/ca/cacert.pem">cacert.pem文件</a>，再设置环境变量<code>SSL_CERT_FILE</code>指向其路径。</p>
+
+<h3>2.4 安装依赖项</h3>
+
+<p>打开博客根目录，首先将<code>Gemfile</code>和<code>Gemfile.lock</code>中的source替换为更新后的ruby-china镜像，然后</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">gem</span> <span class="n">install</span> <span class="n">bundler</span>   <span class="c1"># 批量包安装工具</span>
+<span class="n">bundle</span> <span class="n">install</span>        <span class="c1"># 安装所有依赖项。如一直卡住无任何输出，请仔细检查镜像设置</span>
+</code></pre></div>
+<p>一个极为常见的问题是<em>Failed to build gem native extension.</em>，此时可以尝试<code>gem install &lt;PACKAGE&gt; --platform=ruby --verbose</code>（真·玄学bug）</p>
+
+<h3>2.5 启动jekyll</h3>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">jekyll</span> <span class="n">serve</span>
+</code></pre></div>
+<p>其中Sass文件中可能出现蜜汁GBK编码错误，解决方法是修改sass的engine.rb文件（其路径取决于ruby安装目录）：</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="c1"># D:\Ruby23-x64\lib\ruby\gems\2.3.0\gems\sass-3.5.1\lib\sass\engine.rb</span>
+<span class="k">module</span> <span class="nn">Sass</span>
+<span class="no">Encoding</span><span class="o">.</span><span class="n">default_external</span> <span class="o">=</span> <span class="no">Encoding</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1"># 声明encoding</span>
+</code></pre></div>
+<ul>
+<li>注1：不能用<code>bundle exec jekyll serve</code>，那个的路径有问题，找不到<code>_config.yml</code>文件</li>
+<li>注2：当时在<code>_config.yml</code>的exclude中加入了<code>node_modules</code>，据说可以防止generate过慢，不知道有用没</li>
+</ul>
+
+<h2>3 修改几个关键配置</h2>
+
+<ol>
+<li><code>_config.yml</code>中的<code>baseurl</code></li>
+<li><code>Rakefile</code>中的<code>GITHUB_REPONAME, GITHUB_REPO_BRANCH</code></li>
+<li><code>Rakefile</code>中的仓库地址设置，如果没配过ssh必须改成普通形式，否则会报RSA错误</li>
+<li>（可选）：修改md引擎为redcarpet，以支持code fence：
+
+<ul>
+<li><code>_config.yml</code>中的md引擎改为<code>markdown: redcarpet</code></li>
+<li><code>gem install redcarpet --platform=ruby --verbose</code></li>
+<li><code>Gemfile</code>中添加<code>gem &quot;redcarpet&quot;, &quot;~&gt; 3.4.0&quot;</code></li>
+</ul></li>
+</ol>
+
+<h2>4 改主页、博客等</h2>
+
+<ol>
+<li>修改<code>_config.yml</code>的各项个人信息</li>
+<li>主页<code>index.html</code>中增删文字、按钮（图标见<code>_icons.yml</code>）</li>
+<li>博客<code>_posts/</code>中加入<code>YYYY-MM-DD-some-title.markdown</code>即可（每个图片可以加入封图，封图显示在页面内；无图时为<code>placeholder.png</code>）</li>
+</ol>
+
+<h2>5 发布</h2>
+
+<ul>
+<li>需特别注意：必须用<code>rake</code>或<code>rake publish</code>才可发布，直接<code>git push</code>不行（因为这个模板的路径设置较复杂，直接push在GitHub上build不过，为这个折腾了几小时= =）</li>
+</ul>
+
+<h2>6 排版调整</h2>
+
+<ol>
+<li>字体字号：<code>_typography.sass</code>
+
+<ul>
+<li>修改各个标题的字重和字号、统一<code>p, ul, li</code>的字重和字号（1.1rem）</li>
+<li>按照黑色主题的<code>code</code>属性，修改内联代码的样式（代码块不知如何修改）</li>
+</ul></li>
+<li>文章摘要：<code>article.html</code>
+
+<ul>
+<li>修改摘要截断字符数、行高</li>
+</ul></li>
+<li>代码样式：<code>_syntax.sass</code>
+
+<ul>
+<li>从<a href="http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html">配色网站</a>选择一款主题（CSS格式），再用<a href="http://css2sass.herokuapp.com/">CSS-SASS/SCSS转换器</a>转换为SASS</li>
+<li>将其复制到<code>_syntax.sass</code>中，注意不能覆盖前面的<code>pre, code</code>类</li>
+<li>增加<code>.n</code>（普通代码）和<code>.p</code>（标点）子类，将其颜色改为相配的颜色（如<code>#666666</code>）</li>
+</ul></li>
+</ol>
+
+<h2>7 讨论功能</h2>
+
+<ol>
+<li>注册<a href="https://disqus.com/admin/create/">Disqus</a>，获得一个SHORTNAME</li>
+<li>将<code>_config.yml</code>中的<code>url</code>指向博客主页</li>
+<li>将<code>_config.yml</code>中的<code>disqus_shortname</code>和<code>disqus_site_shortname</code>设为SHORTNAME</li>
+<li>在<code>https://{YOUR_SHORTNAME}.disqus.com/admin/settings/general/</code>中，将<em>Website URL</em>指向博客主页</li>
+<li>在模板page的最后include <code>comments.html</code>（注：将Disqus集成到博客中的逻辑在<code>comments.html</code>中已经实现封装好，不用修改此文件）</li>
+</ol>
+
+  </div>
+
+  
+<hr>
+
+<aside id="comments" class="disqus">
+  <h3><i class="icon icon-comments-o"></i> Comments</h3>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'https://paula15.github.io/home/blog/2018/welcome-to-jekyll/';
+      this.page.identifier = '/blog/2018/welcome-to-jekyll';
+      console.log(this.page.url);
+    };
+    (function() {
+      var d = document,
+      s = d.createElement('script');
+      s.src = '//paula15.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      console.log(s.src);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+    <li><a href="mailto:zzp.thu@gmail.com" target="_blank"><i class="icon icon-mail3"></i></a></li>
+  <li><a href="https://github.com/Paula15" target="_blank"><i class="icon icon-github"></i></a></li>
+  <!-- <li><a href="" target="_blank"><i class="icon icon-twitter"></i></a></li> -->
+  <li><a href="https://www.facebook.com/zzp.thu" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <!-- <li><a href="" target="_blank"><i class="icon icon-linkedin"></i></a></li> -->
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="http://github.com/Paula15/home" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+</body>
+</html>

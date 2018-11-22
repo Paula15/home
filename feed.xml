@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zhengping Zhou</title>
+    <description></description>
+    <link>https://paula15.github.io/home/home/</link>
+    <atom:link href="https://paula15.github.io/home/home/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 22 Nov 2018 18:40:45 +0800</pubDate>
+    <lastBuildDate>Thu, 22 Nov 2018 18:40:45 +0800</lastBuildDate>
+    <generator>Jekyll v3.5.1</generator>
+    
+      <item>
+        <title>Windows10用Jekyll搭建个人博客</title>
+        <description>&lt;h1&gt;整体流程&lt;/h1&gt;
+
+&lt;h2&gt;1 选取主题&lt;/h2&gt;
+
+&lt;p&gt;从&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll主题库&lt;/a&gt;选取一款并下载源码。我看中了三款主题：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://nandomoreirame.github.io/nandomoreira-jekyll-theme/&quot;&gt;蓝色&lt;/a&gt;：带封图&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://joshgerdes.com/jekyll-uno/2016/welcome-to-jekyll/&quot;&gt;黑色&lt;/a&gt;：有侧栏，但移动端排版有bug&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://nandomoreirame.github.io/end2end/&quot;&gt;白色&lt;/a&gt;：简洁&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最终选中白色。&lt;/p&gt;
+
+&lt;h2&gt;2 安装ruby环境&lt;/h2&gt;
+
+&lt;p&gt;被Ubuntu虚拟机卡得忍无可忍，痛下决心直接在Windows10上配置ruby。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;需注意：以下所有操作必须在&lt;strong&gt;管理员CMD&lt;/strong&gt;下进行！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3&gt;2.1 下载&lt;a href=&quot;https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi&quot;&gt;ruby2.3.3&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;需勾选&lt;em&gt;Add ruby executables to your path&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;2.2 下载&lt;a href=&quot;https://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe&quot;&gt;ruby DevKit&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;打开解压目录，执行&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DivKit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rb&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;DivKit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rb&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;review&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;DivKit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rb&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;2.3 更新Gem源&lt;/h3&gt;
+
+&lt;p&gt;rubygem这个国外源很慢，需换成国内镜像。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rubygems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;china&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;第二步可能出现SSL报错，解决方法是先下载&lt;a href=&quot;http://curl.haxx.se/ca/cacert.pem&quot;&gt;cacert.pem文件&lt;/a&gt;，再设置环境变量&lt;code&gt;SSL_CERT_FILE&lt;/code&gt;指向其路径。&lt;/p&gt;
+
+&lt;h3&gt;2.4 安装依赖项&lt;/h3&gt;
+
+&lt;p&gt;打开博客根目录，首先将&lt;code&gt;Gemfile&lt;/code&gt;和&lt;code&gt;Gemfile.lock&lt;/code&gt;中的source替换为更新后的ruby-china镜像，然后&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundler&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# 批量包安装工具&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# 安装所有依赖项。如一直卡住无任何输出，请仔细检查镜像设置&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;一个极为常见的问题是&lt;em&gt;Failed to build gem native extension.&lt;/em&gt;，此时可以尝试&lt;code&gt;gem install &amp;lt;PACKAGE&amp;gt; --platform=ruby --verbose&lt;/code&gt;（真·玄学bug）&lt;/p&gt;
+
+&lt;h3&gt;2.5 启动jekyll&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jekyll&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serve&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中Sass文件中可能出现蜜汁GBK编码错误，解决方法是修改sass的engine.rb文件（其路径取决于ruby安装目录）：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# D:\Ruby23-x64\lib\ruby\gems\2.3.0\gems\sass-3.5.1\lib\sass\engine.rb&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Sass&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_external&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 声明encoding&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;注1：不能用&lt;code&gt;bundle exec jekyll serve&lt;/code&gt;，那个的路径有问题，找不到&lt;code&gt;_config.yml&lt;/code&gt;文件&lt;/li&gt;
+&lt;li&gt;注2：当时在&lt;code&gt;_config.yml&lt;/code&gt;的exclude中加入了&lt;code&gt;node_modules&lt;/code&gt;，据说可以防止generate过慢，不知道有用没&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;3 修改几个关键配置&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;_config.yml&lt;/code&gt;中的&lt;code&gt;baseurl&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Rakefile&lt;/code&gt;中的&lt;code&gt;GITHUB_REPONAME, GITHUB_REPO_BRANCH&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Rakefile&lt;/code&gt;中的仓库地址设置，如果没配过ssh必须改成普通形式，否则会报RSA错误&lt;/li&gt;
+&lt;li&gt;（可选）：修改md引擎为redcarpet，以支持code fence：
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;_config.yml&lt;/code&gt;中的md引擎改为&lt;code&gt;markdown: redcarpet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gem install redcarpet --platform=ruby --verbose&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Gemfile&lt;/code&gt;中添加&lt;code&gt;gem &amp;quot;redcarpet&amp;quot;, &amp;quot;~&amp;gt; 3.4.0&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;4 改主页、博客等&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;修改&lt;code&gt;_config.yml&lt;/code&gt;的各项个人信息&lt;/li&gt;
+&lt;li&gt;主页&lt;code&gt;index.html&lt;/code&gt;中增删文字、按钮（图标见&lt;code&gt;_icons.yml&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;博客&lt;code&gt;_posts/&lt;/code&gt;中加入&lt;code&gt;YYYY-MM-DD-some-title.markdown&lt;/code&gt;即可（每个图片可以加入封图，封图显示在页面内；无图时为&lt;code&gt;placeholder.png&lt;/code&gt;）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;5 发布&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;需特别注意：必须用&lt;code&gt;rake&lt;/code&gt;或&lt;code&gt;rake publish&lt;/code&gt;才可发布，直接&lt;code&gt;git push&lt;/code&gt;不行（因为这个模板的路径设置较复杂，直接push在GitHub上build不过，为这个折腾了几小时= =）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;6 排版调整&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;字体字号：&lt;code&gt;_typography.sass&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;修改各个标题的字重和字号、统一&lt;code&gt;p, ul, li&lt;/code&gt;的字重和字号（1.1rem）&lt;/li&gt;
+&lt;li&gt;按照黑色主题的&lt;code&gt;code&lt;/code&gt;属性，修改内联代码的样式（代码块不知如何修改）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;文章摘要：&lt;code&gt;article.html&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;修改摘要截断字符数、行高&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;代码样式：&lt;code&gt;_syntax.sass&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;从&lt;a href=&quot;http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html&quot;&gt;配色网站&lt;/a&gt;选择一款主题（CSS格式），再用&lt;a href=&quot;http://css2sass.herokuapp.com/&quot;&gt;CSS-SASS/SCSS转换器&lt;/a&gt;转换为SASS&lt;/li&gt;
+&lt;li&gt;将其复制到&lt;code&gt;_syntax.sass&lt;/code&gt;中，注意不能覆盖前面的&lt;code&gt;pre, code&lt;/code&gt;类&lt;/li&gt;
+&lt;li&gt;增加&lt;code&gt;.n&lt;/code&gt;（普通代码）和&lt;code&gt;.p&lt;/code&gt;（标点）子类，将其颜色改为相配的颜色（如&lt;code&gt;#666666&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;7 讨论功能&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;注册&lt;a href=&quot;https://disqus.com/admin/create/&quot;&gt;Disqus&lt;/a&gt;，获得一个SHORTNAME&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;_config.yml&lt;/code&gt;中的&lt;code&gt;url&lt;/code&gt;指向博客主页&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;_config.yml&lt;/code&gt;中的&lt;code&gt;disqus_shortname&lt;/code&gt;和&lt;code&gt;disqus_site_shortname&lt;/code&gt;设为SHORTNAME&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;https://{YOUR_SHORTNAME}.disqus.com/admin/settings/general/&lt;/code&gt;中，将&lt;em&gt;Website URL&lt;/em&gt;指向博客主页&lt;/li&gt;
+&lt;li&gt;在模板page的最后include &lt;code&gt;comments.html&lt;/code&gt;（注：将Disqus集成到博客中的逻辑在&lt;code&gt;comments.html&lt;/code&gt;中已经实现封装好，不用修改此文件）&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 24 Jun 2018 11:30:00 +0800</pubDate>
+        <link>https://paula15.github.io/home/home/blog/2018/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">https://paula15.github.io/home/home/blog/2018/welcome-to-jekyll/</guid>
+        
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+  </channel>
+</rss>
